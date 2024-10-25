@@ -19,6 +19,16 @@ export const getBooks = async () => {
   }
 };
 
+export const getBookByQuery = async (query: string) => {
+  try {
+    const response = await axios.get(`${API}/api/books/${query}`);
+    const dataObj = response.data;
+    return dataObj.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const createBook = async ({ data }: { data: BookData } ,token:string | undefined, ) => {
   try {
 
