@@ -12,6 +12,7 @@ interface book {
 export default async function Home() {
   const session = await getServerSession(authOptions);
   const books = await getBooks();
+  console.log("Session:", session?.user?.name);
 
   return (
 <div className="min-h-screen bg-white text-gray-800">
