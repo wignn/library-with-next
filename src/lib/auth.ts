@@ -22,7 +22,6 @@ export const authOptions: NextAuthOptions = {
         }
 
         const { username, password } = credentials;
-        console.log("Before Fetch:", { username, password });
 
         const response = await fetch(`${API}/api/users/login`, {
           method: "POST",
