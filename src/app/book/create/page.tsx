@@ -130,7 +130,6 @@ const CreateBookForm: React.FC = () => {
           />
         </div>
 
-        {/* Description Field */}
         <div className="mb-5">
           <label
             htmlFor="description"
@@ -169,7 +168,6 @@ const CreateBookForm: React.FC = () => {
           </div>
         </div>
 
-        {/* Progress Bar */}
         {progress > 0 && (
           <div className="w-full bg-gray-200 rounded-full mb-4">
             <div
@@ -181,12 +179,12 @@ const CreateBookForm: React.FC = () => {
           </div>
         )}
 
-        {/* Form Errors */}
+
         {formErrors.submit && (
           <p className="text-red-500 mb-4">{formErrors.submit}</p>
         )}
 
-        {/* Success Message */}
+     
         {successMessage && (
           <p className="text-green-500 mb-4">{successMessage}</p>
         )}
