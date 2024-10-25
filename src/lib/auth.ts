@@ -6,12 +6,15 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
+      
       credentials: {
         username: { label: "username", type: "text", placeholder: "wignn" },
         password: { label: "password", type: "password" },
       },
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       async authorize(credentials, req) {
         console.log("Credentials:", credentials);
+        
 
         if (!credentials?.username || !credentials?.password) {
           console.log("Missing username or password");
@@ -42,6 +45,9 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/sign",
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
