@@ -33,7 +33,9 @@ const CreateBookForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { data: session } = useSession();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -47,7 +49,7 @@ const CreateBookForm: React.FC = () => {
     }
 
     setIsSubmitting(true);
-    setFormErrors({}); 
+    setFormErrors({});
     setSuccessMessage("");
 
     try {
@@ -61,23 +63,29 @@ const CreateBookForm: React.FC = () => {
         thumbnailUrl: result.thumbnailUrl || "",
       });
       const token = session?.token;
-      const res = await createBook({ data: { ...formData, cover: result.url } }, token, );
+      const res = await createBook(
+        { data: { ...formData, cover: result.url } },
+        token
+      );
 
       console.log(res.data);
-      setSuccessMessage("Book created successfully!"); 
+      setSuccessMessage("Book created successfully!");
       setFormData({ title: "", author: "", description: "" });
       setUrl(undefined);
       setProgress(0);
-      setFile(undefined); 
-
+      setFile(undefined);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        setFormErrors({ submit: error.response.data.message || "Failed to create book. Please try again." });
+        setFormErrors({
+          submit:
+            error.response.data.message ||
+            "Failed to create book. Please try again.",
+        });
       } else {
         setFormErrors({ submit: "Failed to create book. Please try again." });
       }
     } finally {
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
     }
   };
 
@@ -88,7 +96,10 @@ const CreateBookForm: React.FC = () => {
         className="bg-gradient-to-br from-gray-100 to-gray-300 p-6 my-4 rounded-lg border border-gray-400 shadow-lg"
       >
         <div className="mb-5">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 capitalize">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700 capitalize"
+          >
             Title
           </label>
           <input
@@ -101,10 +112,11 @@ const CreateBookForm: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-
-        {/* Author Field */}
         <div className="mb-5">
-          <label htmlFor="author" className="block text-sm font-medium text-gray-700 capitalize">
+          <label
+            htmlFor="author"
+            className="block text-sm font-medium text-gray-700 capitalize"
+          >
             Author
           </label>
           <input
@@ -120,7 +132,10 @@ const CreateBookForm: React.FC = () => {
 
         {/* Description Field */}
         <div className="mb-5">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 capitalize">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700 capitalize"
+          >
             Description
           </label>
           <textarea
@@ -136,7 +151,10 @@ const CreateBookForm: React.FC = () => {
 
         {/* Cover Image Upload */}
         <div className="mb-5">
-          <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="coverImage"
+            className="block text-sm font-medium text-gray-700"
+          >
             Cover Image
           </label>
           <div className="justify-center flex">
@@ -164,12 +182,21 @@ const CreateBookForm: React.FC = () => {
         )}
 
         {/* Form Errors */}
-        {formErrors.submit && <p className="text-red-500 mb-4">{formErrors.submit}</p>}
-        
-        {/* Success Message */}
-        {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
+        {formErrors.submit && (
+          <p className="text-red-500 mb-4">{formErrors.submit}</p>
+        )}
 
-        {/* Submit Button */}
+        {/* Success Message */}
+        {successMessage && (
+          <p className="text-green-500 mb-4">{successMessage}</p>
+        )}
+
+        {url && (
+          <div className="text-green-500 mb-4">
+            <p>URL: {url.url}</p>
+            <p>Thumbnail URL: {url.thumbnailUrl}</p>
+          </div>
+        )}
         <button
           type="submit"
           className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 disabled:bg-gray-400 transition ease-in-out shadow-md"
