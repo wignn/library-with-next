@@ -1,0 +1,1 @@
+export const API = 'https://api-with-nest-production.up.railway.app';
