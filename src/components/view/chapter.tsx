@@ -7,6 +7,7 @@ interface Chapter {
   type: "Premium" | "Free";
 }
 
+//mock
 const chapters: Chapter[] = [
   { id: 1, title: "First Encounter", date: "Jul 04, 2024", type: "Free" },
   { id: 2, title: "A Study in Grey", date: "Jul 04, 2024", type: "Free" },
